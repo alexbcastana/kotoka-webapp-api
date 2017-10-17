@@ -1,0 +1,164 @@
+service: kotoka-webapp-api
+
+plugins:
+  - serverless-finch
+
+custom:
+  client:
+    bucketName: kotoka-static-resources
+
+provider:
+  name: aws
+  runtime: nodejs6.10
+  region: us-west-1
+  environment:
+    DYNAMODB_TABLE: ${self:service}-${opt:stage, self:provider.stage}
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - dynamodb:Query
+        - dynamodb:Scan
+        - dynamodb:GetItem
+        - dynamodb:PutItem
+        - dynamodb:UpdateItem
+        - dynamodb:DeleteItem
+      Resource: "arn:aws:dynamodb:${opt:region, self:provider.region}:*:table/${self:provider.environment.DYNAMODB_TABLE}"
+
+
+functions:
+  lambdaStatus:
+    handler: status.lambdaStatus
+  status:
+    handler: status.status
+    events:
+      - http:
+          method: get
+          path: status
+  echo:
+    handler: status.echo
+    events:
+      - http:
+          method: get
+          path: echo
+          cors: true
+  create:
+    handler: berries.create
+    events:
+      - http:
+          path: berries
+          method: post
+          cors: true
+  list:
+    handler: berries.list
+    events:
+      - http:
+          path: berries
+          method: get
+          cors: true
+
+resources:
+  Resources:
+    KotokaDBBerries:
+      Type: 'AWS::DynamoDB::Table'
+      DeletionPolicy: Retain
+      Properties:
+        AttributeDefinitions:
+          -
+            AttributeName: id
+            AttributeType: S
+        KeySchema:
+          -
+            AttributeName: id
+            KeyType: HASH
+        ProvisionedThroughput:
+          ReadCapacityUnits: 1
+          WriteCapacityUnits: 1
+        TableName: ${self:provider.environment.DYNAMODB_TABLE}
+
+  Resources:
+    s3filesbucket:
+      Type: 'AWS::S3::Bucket'
+      Properties:
+        AccessControl: PublicReadWrite
+        BucketName: ${env:bucketNamePrefix}kotoka-static-resources2
+        VersioningConfiguration:
+          Status: Suspended
+        Tags:
+          - Key: Environment
+            Value: ${opt:stage}
+        WebsiteConfiguration:
+          IndexDocument: index.html
+    route53BucketDNS: #this adds a DNS recordset which can be used for public viewing of objects
+      Type: "AWS::Route53::RecordSet"
+      Properties:
+        HostedZoneId: <hosted zone id>
+        Name: ${env:bucketNamePrefix}<your bucket name>
+        ResourceRecords:
+          - ${env:bucketNamePrefix}<your bucket name>.s3-website-us-east-1.amazonaws.com
+        TTL: 300
+        Type: CNAME
+    s3Proxy:
+      Type: "AWS::ApiGateway::RestApi"
+      Properties:
+        BinaryMediaTypes: #add or substract MIME types here
+          - image/png
+          - image/jpg
+          - image/gif
+          - image/x-icon
+          - application/octet-stream
+        Description: Storage service for ${opt:stage} environment
+        FailOnWarnings: false
+        Name: ${env:apiGatewayPrefix}fileStorage #api gateway name
+    s3ProxyAuthorizer: #custom authorizer for the API gateway which adds stuff to the bucket
+      Type: "AWS::ApiGateway::Authorizer"
+      Properties:
+        AuthorizerResultTtlInSeconds: 300
+        AuthorizerUri: arn:aws:apigateway:us-east-1:lambda:path//2015-03-31/functions/arn:aws:lambda:us-east-1:<your acc id>:function:${opt:stage}<auth fn name>/invocations
+        IdentitySource: method.request.header.Authorization
+        IdentityValidationExpression: ^Bearer.+
+        Name: CommonAuthorizer
+        RestApiId:
+          Ref: "s3Proxy"
+        Type: TOKEN
+    s3ProxyAnyMethod:
+      Type: "AWS::ApiGateway::Method"
+      Properties:
+        ApiKeyRequired: false
+        AuthorizationType: CUSTOM
+        AuthorizerId:
+          Ref: "s3ProxyAuthorizer"
+        HttpMethod: ANY
+        Integration:
+          Credentials: arn:aws:iam::<your acc id>:role/s3ProxyRole
+          IntegrationHttpMethod: ANY
+          IntegrationResponses:
+            - StatusCode: 200
+          PassthroughBehavior: WHEN_NO_MATCH
+          RequestParameters:
+            integration.request.header.Content-Disposition: method.request.header.Content-Disposition
+            integration.request.header.Content-Type: method.request.header.Content-Type
+            integration.request.header.x-amz-acl: method.request.header.x-amz-acl
+            integration.request.path.key: method.request.querystring.key
+          Type: AWS
+          Uri: arn:aws:apigateway:us-east-1:s3:path/${env:bucketNamePrefix}<your bucket name>/{key}
+        MethodResponses:
+          - StatusCode: 200
+        RequestParameters:
+          method.request.header.Content-Disposition: false
+          method.request.header.Content-Type: false
+          method.request.header.x-amz-acl: false
+          method.request.querystring.key: false
+        ResourceId:
+          Fn::GetAtt:
+            - "s3Proxy"
+            - "RootResourceId"
+        RestApiId:
+          Ref: "s3Proxy"
+    ApiGatewayDeploymentthisiswhatiwillreplace:
+      Type: 'AWS::ApiGateway::Deployment'
+      Properties:
+        RestApiId:
+          Ref: "s3Proxy"
+        StageName: ${opt:stage}
+      DependsOn:
+        - s3ProxyAnyMethod
