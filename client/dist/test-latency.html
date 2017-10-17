@@ -1,0 +1,68 @@
+<html>
+  <head>
+    <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.2.1.min.js"></script>
+  </head>
+  <body>
+    <p>Enter how many requests to send (0 - 500)</p>
+    <form>
+      <input type="text" id="num-requests-field"/>
+    </form>
+    <button class="button" type="button" id="testButton">Test Latency</button>
+    <p id="count-field">Count : 0</p>
+    <p id="results-field"></p>
+  </body>
+</html>
+<script>
+  $(document).ready(function(){
+    $("#testButton").click(
+      {
+        resultHandler : displayResults
+      },
+      testLatency
+    );
+  });
+
+  function testLatency(param) {
+    param.numRequests = parseInt($("#num-requests-field").val());
+
+    if(param.numRequests > 500 || param.count > 500) {
+      //stop bankrupting me...
+      return;
+    }
+
+    if(param.count == null) {
+      param.count = 0;
+    }
+    if(param.startTime == null) {
+      param.startTime = window.performance.now();
+    }
+
+    param.count++;
+
+    if(param.count % 10 == 0) {
+      $("#count-field").html("Number of requests: " + param.count + '\n' +
+          "Percentage Done: " + (param.count / param.numRequests) * 100 + "%");
+    }
+
+    else if(param.count >= param.numRequests) {
+      param.data.resultHandler(param.numRequests, param.startTime, window.performance.now());
+      return;
+    }
+
+    $.ajax("https://9esveto8d9.execute-api.us-west-1.amazonaws.com/dev/reply",
+      {
+        dataType: "text",
+        success: function() {
+          testLatency(param);
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+          console.log(textStatus); //error logging
+        }
+      });
+  }
+
+  function displayResults(numRequests, startTime, endTime) {
+    var time = (endTime - startTime) / 1000;
+    $("#results-field").html(numRequests + " requests took " + time + "s at " + (numRequests / time) + " per second");
+  }
+</script>
