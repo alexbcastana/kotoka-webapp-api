@@ -9,9 +9,11 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "serverless-domain-manager": "^1.1.14",
     "serverless-starter": "^0.2.1"
   },
   "dependencies": {
+    "aws-sdk": "^2.135.0",
     "serverless-finch": "^1.1.1"
   }
 }

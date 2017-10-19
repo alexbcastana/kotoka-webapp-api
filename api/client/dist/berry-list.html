@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <body>
+    <h2>Strawberry Database</h2>
+    <div id="berry-table"></div>
+  </body>
+</html>
+<script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.2.1.min.js"></script>
+<script>
+$(document).ready(function(){
+  getBerries();
+  window.setInterval(getBerries, 2000);
+});
+
+function getBerries() {
+  console.log("Updating...")
+  $.ajax("https://api.kotoka.org/dev/berries",
+    {
+      dataType: "text",
+      success: function(jqXHR, textStatus) {
+        buildTable($('#berry-table'), JSON.parse(jqXHR), ['id', 'notes']);
+      },
+      error: function(jqXHR, textStatus, errorThitemn) {
+        console.log(textStatus);
+      }
+    });
+}
+
+function buildTable(root, items, propertyList) {
+  console.log("buildTable");
+  if(items.length <= 0) {
+    return;
+  }
+  if($('#table') != null) {
+    root.empty();
+  }
+
+  $(root).append("<div class=\"table-responsive\"><table id=\"table\" class=\"table table-striped\"><tbody id=\"table-body\"><tr></tr></tbody></table><div class=\"table-responsive\">");
+
+  for(item of items) {
+    var row = "<tr>";
+    console.log("item: " + Object.getOwnPropertyNames(item));
+    for(property of propertyList) {
+      row += "<td>" + item[property] + "</td>";
+    }
+    row += "</tr";
+    $('#table-body').append(row);
+  }
+
+  $('#table').append("<thead id=\"table-head\"></thead>");
+
+  for(property of propertyList) {
+    console.log("prop: " +  property);
+    $('#table-head').append("<th>" + property + "</th>");
+  }
+
+  return;
+}
+</script>
