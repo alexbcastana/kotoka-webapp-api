@@ -2,10 +2,14 @@ service: kotoka-webapp-api
 
 plugins:
   - serverless-finch
+  - serverless-dynamodb-local
+  - serverless-offline
 
 custom:
   client:
-    bucketName: kotoka.org
+    bucketName: kotoka-static-resources
+  babelOptions:
+      presets: ["es2015"]
 
 provider:
   name: aws
@@ -56,21 +60,21 @@ functions:
           method: get
           cors: true
 
-# resources:
-#   Resources:
-#     berries:
-#       Type: 'AWS::DynamoDB::Table'
-#       DeletionPolicy: Retain
-#       Properties:
-#         AttributeDefinitions:
-#           -
-#             AttributeName: id
-#             AttributeType: S
-#         KeySchema:
-#           -
-#             AttributeName: id
-#             KeyType: HASH
-#         ProvisionedThroughput:
-#           ReadCapacityUnits: 1
-#           WriteCapacityUnits: 1
-#         TableName: ${self:provider.environment.DYNAMODB_TABLE}
+resources:
+  Resources:
+    berries:
+      Type: 'AWS::DynamoDB::Table'
+      DeletionPolicy: Retain
+      Properties:
+        AttributeDefinitions:
+          -
+            AttributeName: id
+            AttributeType: S
+        KeySchema:
+          -
+            AttributeName: id
+            KeyType: HASH
+        ProvisionedThroughput:
+          ReadCapacityUnits: 1
+          WriteCapacityUnits: 1
+        TableName: ${self:provider.environment.DYNAMODB_TABLE}

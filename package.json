@@ -10,10 +10,14 @@
   "license": "ISC",
   "devDependencies": {
     "serverless-domain-manager": "^1.1.14",
+    "serverless-dynamodb-local": "^0.2.26",
+    "serverless-offline": "^3.16.0",
     "serverless-starter": "^0.2.1"
   },
   "dependencies": {
     "aws-sdk": "^2.135.0",
+    "serverless-dynamodb-client": "0.0.2",
+    "serverless-dynamodb-local": "^0.2.26",
     "serverless-finch": "^1.1.1"
   }
 }
