@@ -36,10 +36,10 @@
         resultHandler(numRequests, startTime, window.performance.now());
         return;
       }
-      
+
       count++;
 
-      $.ajax("https://api.kotoka.org/dev/echo",
+      $.ajax("http://api.kotoka.org/echo",
         {
           dataType: "text",
           success: function() {

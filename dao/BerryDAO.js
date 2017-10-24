@@ -43,6 +43,19 @@ class BerryDAO {
     // fetch all berries from the database
     this.db.scan(params, callback);
   }
+
+  delete(id, callback) {
+
+    const params = {
+      TableName: process.env.DYNAMODB_TABLE,
+      Key: {
+        id: id,
+      },
+    };
+
+    // delete the todo from the database
+    this.db.delete(params, callback);
+  }
 }
 
 module.exports = BerryDAO;

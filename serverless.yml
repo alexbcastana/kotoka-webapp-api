@@ -59,6 +59,13 @@ functions:
           path: berries
           method: get
           cors: true
+  delete:
+    handler: berries.delete
+    events:
+      - http:
+          path: berries/{id}
+          method: delete
+          cors: true
 
 resources:
   Resources:
