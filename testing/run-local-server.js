@@ -43,7 +43,7 @@ else if(platform == 'darwin'){
   hostsFileLocation = '/private/etc/hosts'
 }
 else if(platform == 'win32') {
-  hostsFileLocation = '%SystemRoot%\\System32\\drivers\\etc\\hosts';
+  hostsFileLocation = 'C:Windows\\System32\\drivers\\etc\\hosts';
 }
 else {
   console.error('Error: Operating System not supported')
