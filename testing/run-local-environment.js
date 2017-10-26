@@ -10,14 +10,16 @@
 ** 127.0.0.3 api.kotoka.org
 **
 ** You may have to disconnect from the internet initially if you get an address not
-** available error. 
+** available error.
 */
 
 'use strict'
 
-var forward = require('../../http-forward-host');
+var forward = require('./http-forward-host');
 var express = require('express')
 var child_process = require('child_process');
+var fs = require('fs');
+var JFile = require('jfile');
 
 var staticServerPort = 4000;
 var staticServerHost = 'kotoka.org';
