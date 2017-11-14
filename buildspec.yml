@@ -6,6 +6,8 @@ phases:
       - apt-get -y update
       - apt-get -y install zip
       - npm install -g serverless@1.9.0
+      - npm install -g serverless-finch
+      - npm install -g serverless-dynamodb-client
   build:
     commands:
       - whoami
