@@ -19,7 +19,6 @@ var forward = require('./http-forward-host');
 var express = require('express')
 var child_process = require('child_process');
 var fs = require('fs');
-var JFile = require('jfile');
 var os = require('os');
 
 var staticServerPort = 4000;
@@ -85,7 +84,7 @@ app.listen(staticServerPort, staticServerHost, function () {
 });
 
 //Run 'sls offline start --host api.kotoka.org' to start the offline FaaS
-var apiServerProcess = child_process.spawn('sls', ['offline', 'start', '--host', apiServerHost],
+var apiServerProcess = child_process.spawn('sls', ['offline', 'start', '--host', apiServerHost, '--migrate'],
   {
     'cwd' : '..',
   }

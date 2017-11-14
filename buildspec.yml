@@ -1,0 +1,24 @@
+version: 0.1
+
+phases:
+  install:
+    commands:
+      - apt-get -y update
+      - apt-get -y install zip
+      - npm install -g serverless
+      - npm install -S serverless-finch
+      - npm install -S serverless-dynamodb-client
+      - npm install -S serverless-dynamodb-local
+      - npm install -S serverless-offline
+      - sls help
+  build:
+    commands:
+  post_build:
+    commands:
+      - sls deploy
+      - sls client deploy    
+artifacts:
+  files:
+    - serverless.yml
+    - publish.zip
+  discard-paths: yes
