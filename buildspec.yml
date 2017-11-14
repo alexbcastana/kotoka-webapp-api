@@ -10,13 +10,13 @@ phases:
       - npm install -S serverless-dynamodb-client
       - npm install -S serverless-dynamodb-local
       - npm install -S serverless-offline
+      - sls help
   build:
     commands:
-      - whoami
-      - sls help
   post_build:
     commands:
-      - serverless deploy
+      - sls deploy
+      - sls client deploy    
 artifacts:
   files:
     - serverless.yml
