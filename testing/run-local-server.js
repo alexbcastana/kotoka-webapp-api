@@ -84,7 +84,7 @@ app.listen(staticServerPort, staticServerHost, function () {
 });
 
 //Run 'sls offline start --host api.kotoka.org' to start the offline FaaS
-var apiServerProcess = child_process.spawn('sls', ['offline', 'start', '--host', apiServerHost],
+var apiServerProcess = child_process.spawn('sls', ['offline', 'start', '--host', apiServerHost, '--migrate'],
   {
     'cwd' : '..',
   }
