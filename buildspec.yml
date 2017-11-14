@@ -9,6 +9,7 @@ phases:
       - npm install -S serverless-finch
       - npm install -S serverless-dynamodb-client
       - npm install -S serverless-dynamodb-local
+      - npm install -S serverless-offline
   build:
     commands:
       - whoami
