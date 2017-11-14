@@ -1,0 +1,4 @@
+#!/bin/bash
+
+
+curl http://api.kotoka.org/berries

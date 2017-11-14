@@ -1,0 +1,3 @@
+#!/bin/bash
+
+curl -X POST api.kotoka.org/berries --data '{ "notes": "larryberry3" }'
