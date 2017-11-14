@@ -5,7 +5,7 @@
 ** HTTP and FaaS related semantics should be handled here.
 **
 ** This handler injects depencies required for its functionality.
-** Ex. dynamoDb
+** Ex. dynamoDB
 */
 
 'use strict';
