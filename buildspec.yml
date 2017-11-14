@@ -14,7 +14,7 @@ phases:
       - sls help
   post_build:
     commands:
-      - serverless deploy -stage $env -region us-east-1 –verbose
+      - serverless deploy
 artifacts:
   files:
     - serverless.yml
