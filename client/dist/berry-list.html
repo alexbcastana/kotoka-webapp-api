@@ -14,7 +14,7 @@ $(document).ready(function(){
 
 function getBerries() {
   console.log("Updating...")
-  $.ajax("https://api.kotoka.org/dev/berries",
+  $.ajax("http://api.kotoka.org/dev/berries",
     {
       dataType: "text",
       success: function(jqXHR, textStatus) {

@@ -19,7 +19,6 @@ var forward = require('./http-forward-host');
 var express = require('express')
 var child_process = require('child_process');
 var fs = require('fs');
-var JFile = require('jfile');
 var os = require('os');
 
 var staticServerPort = 4000;
