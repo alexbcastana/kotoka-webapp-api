@@ -20,7 +20,6 @@ var express = require('express')
 var child_process = require('child_process');
 var fs = require('fs');
 var os = require('os');
-var https = require('https');
 
 var staticServerPort = 4000;
 var staticServerHost = 'kotoka.org';
@@ -79,13 +78,8 @@ fs.writeFileSync(hostsFileLocation, hostsFileText, 'utf8', function (err) {
   console.log('hosts file patched');
 });
 
-var options = {
-  key: fs.readFileSync('/home/dlance/kotoka.org.key'),
-  cert: fs.readFileSync('/home/dlance/kotoka.org.crt'),
-};
-
 //Start local static host
-var server = https.createServer(options, app).listen(staticServerPort, staticServerHost, function () {
+app.listen(staticServerPort, staticServerHost, function () {
   console.log('Static file server up at ' + staticServerHost + ':' + staticServerPort);
 });
 
