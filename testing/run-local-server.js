@@ -31,6 +31,7 @@ var apiServerHost = 'api.kotoka.org';
 //Create static file server to simulate s3
 var app = express()
 app.use(express.static('../client/dist',{ 'extensions' : ['html']}));
+app.set('view engine', 'ejs');
 
 //Determine the host OS
 var platform = os.platform();
@@ -86,7 +87,7 @@ var options = {
 
 //Start local static host
 var server = https.createServer(options, app).listen(staticServerPort, staticServerHost, function () {
-  console.log('Static file server up at ' + staticServerHost + ':' + staticServerPort);
+  console.log('Static file server up at https://' + staticServerHost + ':' + staticServerPort);
 });
 
 //Run 'sls offline start --host api.kotoka.org' to start the offline FaaS
