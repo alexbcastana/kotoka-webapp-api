@@ -80,8 +80,8 @@ fs.writeFileSync(hostsFileLocation, hostsFileText, 'utf8', function (err) {
 });
 
 var options = {
-  key: fs.readFileSync('/home/dlance/kotoka.org.key'),
-  cert: fs.readFileSync('/home/dlance/kotoka.org.crt'),
+  key: fs.readFileSync('kotoka.org.key'),
+  cert: fs.readFileSync('kotoka.org.crt'),
 };
 
 //Start local static host
