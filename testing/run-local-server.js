@@ -30,8 +30,9 @@ var apiServerHost = 'api.kotoka.org';
 
 //Create static file server to simulate s3
 var app = express()
-app.use(express.static('../client/dist',{ 'extensions' : ['html']}));
 app.set('view engine', 'ejs');
+app.set('views', '../client/dist');
+app.use(express.static('../client/dist'));
 
 //Determine the host OS
 var platform = os.platform();
@@ -119,4 +120,8 @@ process.on('SIGINT', () => {
     console.log('hosts file restored');
     process.exit(0);
   });
+});
+
+app.get('/', function(req, res) {
+    res.render('index');
 });
