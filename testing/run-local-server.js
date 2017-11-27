@@ -86,7 +86,7 @@ var options = {
 };
 
 //Start local static host
-var server = https.createServer(options, app).listen(staticServerPort, staticServerHost, function () {
+var server = https.createServer(options, app).listen(443, staticServerHost, function () {
   console.log('Static file server up at https://' + staticServerHost + ':' + staticServerPort);
 });
 
@@ -106,7 +106,7 @@ apiServerProcess.stderr.on('data', (data) => {
   console.error(`api-server: ERROR: ${data}\n`);
 });
 
-forward(staticServerHost, staticServerPort, 80);
+//forward(staticServerHost, staticServerPort, 80);
 forward(apiServerHost, apiServerPort, 80);
 
 process.on('SIGINT', () => {
