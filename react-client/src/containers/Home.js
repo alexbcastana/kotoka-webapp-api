@@ -5,12 +5,7 @@ import "./Home.css";
 export default class Home extends Component {
   render() {
     return (
-  <html lang="en">
-    <head>
-      <meta charset="utf-8" />
-      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-      <meta name="description" content="" />
-      <meta name="author" content="" />
+        <html>
 
       <title>Kotoka</title>
 
@@ -18,9 +13,7 @@ export default class Home extends Component {
 
 
       <link href="css/jumbotron.css" rel="stylesheet" />
-    </head>
 
-    <body>
 
       <nav className="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
         <a className="navbar-brand" href="#">Kotoka</a>
@@ -89,9 +82,7 @@ export default class Home extends Component {
       <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script>
       <script src="aws-cognito-sdk.min.js"></script>
       <script src="aws-cognito-identity.min.js"></script>
-    </body>
-  </html>
-
+      </html>
     );
   }
 }
