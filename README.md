@@ -34,5 +34,7 @@ Note: root permissions are required to modify the hosts file and bind to port 80
 
 
 To run the React front end locally:
+
 cd react-client
+
 npm start
