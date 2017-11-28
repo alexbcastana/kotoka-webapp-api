@@ -12,7 +12,7 @@ export default class Navbar extends Component {
               <div className="collapse navbar-collapse" id="navbarsExampleDefault">
                 <ul className="navbar-nav mr-auto">
                   <li className="nav-item">
-                    <a className="nav-link" href="berry-list.html">Berries</a>
+                    <a className="nav-link" href="/identifyBerry">Berries</a>
                   </li>
                   <li className="nav-item">
                     <a className="nav-link" href="test-latency.html">Test Latency</a>
@@ -20,10 +20,10 @@ export default class Navbar extends Component {
                 </ul>
             	<ul className="navbar-nav ml-auto">
             	  <li className="nav-item">
-            	    <a className="nav-link" href="https://kotoka.auth.us-east-1.amazoncognito.com/signup?response_type=code&client_id=2u922ia7hq2q1k3mrjptbbo4bs&redirect_uri=https://localhost:3000">Sign Up</a>
+            	    <a className="nav-link" href="https://kotoka.auth.us-east-1.amazoncognito.com/signup?response_type=code&client_id=2u922ia7hq2q1k3mrjptbbo4bs&redirect_uri=https://localhost:3001">Sign Up</a>
             	  </li>
                   <li>
-                      <a className="nav-link" href="https://kotoka.auth.us-east-1.amazoncognito.com/login?response_type=code&client_id=2u922ia7hq2q1k3mrjptbbo4bs&redirect_uri=https://localhost:3000">Login</a>
+                      <a className="nav-link" href="https://kotoka.auth.us-east-1.amazoncognito.com/login?response_type=code&client_id=2u922ia7hq2q1k3mrjptbbo4bs&redirect_uri=https://localhost:3001">Login</a>
                   </li>
             	</ul>
               </div>

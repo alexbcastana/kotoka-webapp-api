@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "axios": "^0.17.1",
     "react": "^16.1.1",
     "react-bootstrap": "^0.31.5",
     "react-dom": "^16.1.1",
@@ -11,7 +12,7 @@
   },
   "devDependencies": {},
   "scripts": {
-    "start": "HTTPS=true react-scripts start",
+    "start": "PORT=3001 HTTPS=true react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"

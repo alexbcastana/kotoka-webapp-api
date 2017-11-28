@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Footer from './Footer';
 
 export default class Container extends Component {
     render() {
@@ -21,6 +22,7 @@ export default class Container extends Component {
                   <p><a className="btn btn-secondary" href="#" role="button">View details &raquo;</a></p>
                 </div>
               </div>
+              <Footer />
             </div>
         )
     }
