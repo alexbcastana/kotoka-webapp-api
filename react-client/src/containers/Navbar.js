@@ -20,10 +20,10 @@ export default class Navbar extends Component {
                 </ul>
             	<ul className="navbar-nav ml-auto">
             	  <li className="nav-item">
-            	    <a className="nav-link" href="https://kotoka.auth.us-east-1.amazoncognito.com/signup?response_type=code&client_id=2u922ia7hq2q1k3mrjptbbo4bs&redirect_uri=https://localhost:3000">Sign Up</a>
+            	    <a className="nav-link" href="https://kotoka.auth.us-east-1.amazoncognito.com/signup?response_type=code&client_id=2u922ia7hq2q1k3mrjptbbo4bs&redirect_uri=https://localhost:3001">Sign Up</a>
             	  </li>
                   <li>
-                      <a className="nav-link" href="https://kotoka.auth.us-east-1.amazoncognito.com/login?response_type=code&client_id=2u922ia7hq2q1k3mrjptbbo4bs&redirect_uri=https://localhost:3000">Login</a>
+                      <a className="nav-link" href="https://kotoka.auth.us-east-1.amazoncognito.com/login?response_type=code&client_id=2u922ia7hq2q1k3mrjptbbo4bs&redirect_uri=https://localhost:3001">Login</a>
                   </li>
             	</ul>
               </div>
