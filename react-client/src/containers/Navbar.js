@@ -12,7 +12,7 @@ export default class Navbar extends Component {
               <div className="collapse navbar-collapse" id="navbarsExampleDefault">
                 <ul className="navbar-nav mr-auto">
                   <li className="nav-item">
-                    <a className="nav-link" href="berry-list.html">Berries</a>
+                    <a className="nav-link" href="/identifyBerry">Berries</a>
                   </li>
                   <li className="nav-item">
                     <a className="nav-link" href="test-latency.html">Test Latency</a>
