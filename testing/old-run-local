@@ -20,7 +20,6 @@ var express = require('express')
 var child_process = require('child_process');
 var fs = require('fs');
 var os = require('os');
-var https = require('https');
 
 var staticServerPort = 4000;
 var staticServerHost = 'kotoka.org';
@@ -30,9 +29,7 @@ var apiServerHost = 'api.kotoka.org';
 
 //Create static file server to simulate s3
 var app = express()
-app.set('view engine', 'ejs');
-app.set('views', '../client/dist');
-app.use(express.static('../client/dist'));
+app.use(express.static('../client/dist',{ 'extensions' : ['html']}));
 
 //Determine the host OS
 var platform = os.platform();
@@ -81,14 +78,9 @@ fs.writeFileSync(hostsFileLocation, hostsFileText, 'utf8', function (err) {
   console.log('hosts file patched');
 });
 
-var options = {
-  key: fs.readFileSync('kotoka.org.key'),
-  cert: fs.readFileSync('kotoka.org.crt'),
-};
-
 //Start local static host
-var server = https.createServer(options, app).listen(443, staticServerHost, function () {
-  console.log('Static file server up at https://' + staticServerHost + ':' + staticServerPort);
+app.listen(staticServerPort, staticServerHost, function () {
+  console.log('Static file server up at ' + staticServerHost + ':' + staticServerPort);
 });
 
 //Run 'sls offline start --host api.kotoka.org' to start the offline FaaS
@@ -107,7 +99,7 @@ apiServerProcess.stderr.on('data', (data) => {
   console.error(`api-server: ERROR: ${data}\n`);
 });
 
-//forward(staticServerHost, staticServerPort, 80);
+forward(staticServerHost, staticServerPort, 80);
 forward(apiServerHost, apiServerPort, 80);
 
 process.on('SIGINT', () => {
@@ -120,8 +112,4 @@ process.on('SIGINT', () => {
     console.log('hosts file restored');
     process.exit(0);
   });
-});
-
-app.get('/', function(req, res) {
-    res.render('index');
 });
