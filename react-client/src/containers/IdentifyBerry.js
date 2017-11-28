@@ -24,8 +24,8 @@ class IdentifyBerry extends Component {
             });
     }
 
-    putsSomething() {
-        console.log("ASDF");
+    modifyBerry() {
+        console.log("modifying berry");
     }
 
     render() {
@@ -43,7 +43,7 @@ class IdentifyBerry extends Component {
             <div className="container">
                 <img src="https://s3.amazonaws.com/kotoka-berry-images/PerfectStrawberry.jpg" />
                 { renderBerries }
-                <button type="button" className="btn btn-success" onClick={() => {this.putsSomething()}}>Ready to Pick!</button>
+                <button type="button" className="btn btn-success" onClick={() => {this.modifyBerry()}}>Ready to Pick!</button>
                 <button type="button" className="btn btn-danger">Unripe</button>
             </div>
         )
