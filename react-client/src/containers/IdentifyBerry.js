@@ -92,10 +92,11 @@ class IdentifyBerry extends Component {
 
     render() {
         const imgUrl = 'https://s3.amazonaws.com/kotoka-berry-images/';
-        const img_1 = imgUrl + 'PerfectStrawberry.jpg';
+        const img_1 = imgUrl + '1.jpg';
         const img_2 = imgUrl + '2.jpg';
         const img_3 = imgUrl + '3.jpg';
         const img_4 = imgUrl + '4.jpg';
+        const img_5 = imgUrl + '5.jpg';
 
         // return (
         //     <div>
@@ -139,9 +140,10 @@ class IdentifyBerry extends Component {
         return (
             <div>
                 {this.renderImageIfExists(img_1)}
-                {this.renderImageIfExists(imgUrl + 'berries.jpg')}
+                {this.renderImageIfExists(img_2)}
                 {this.renderImageIfExists(img_3)}
                 {this.renderImageIfExists(img_4)}
+                {this.renderImageIfExists(img_5)}
             </div>
         )
     }
