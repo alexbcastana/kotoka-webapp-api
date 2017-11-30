@@ -33,6 +33,11 @@ module.exports.create = (event, context, callback) => {
     else {
       // create a response
       const response = {
+        headers: {
+          "Content-Type": "text/html",
+          "Access-Control-Allow-Origin" : "*", // Required for CORS support to work
+          "Access-Control-Allow-Credentials" : true // Required for cookies, authorization headers with HTTPS
+        },
         statusCode: 200,
         body: JSON.stringify(result.Item),
       };
