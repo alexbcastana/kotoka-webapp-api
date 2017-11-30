@@ -1,0 +1,9 @@
+#!/bin/bash
+
+curl -k https://s3.amazonaws.com/kotoka-berry-images/PerfectStrawberry.jpg > curl_berry_test_1
+curl -k https://s3.amazonaws.com/kotoka-berry-images/berries.jpg > curl_berry_test_2
+curl -k https://s3.amazonaws.com/kotoka-berry-images/3.jpg > curl_berry_test_3
+curl -k https://s3.amazonaws.com/kotoka-berry-images/4.jpg > curl_berry_test_4
+
+grep "<Error><Code>" curl_berry_test_*
+exit `echo $?`
