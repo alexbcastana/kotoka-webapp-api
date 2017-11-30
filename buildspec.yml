@@ -17,7 +17,7 @@ phases:
     commands:
       - sls deploy
       - sls client deploy    
-      - get_berries_test
+      - get_berries_test_succeed
 artifacts:
   files:
     - serverless.yml
