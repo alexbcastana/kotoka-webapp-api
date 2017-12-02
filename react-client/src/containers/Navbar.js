@@ -14,9 +14,6 @@ export default class Navbar extends Component {
                   <li className="nav-item">
                     <a className="nav-link" href="/identifyBerry">Berries</a>
                   </li>
-                  <li className="nav-item">
-                    <a className="nav-link" href="test-latency.html">Test Latency</a>
-                  </li>
                 </ul>
             	<ul className="navbar-nav ml-auto">
             	  <li className="nav-item">
