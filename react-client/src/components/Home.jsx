@@ -4,21 +4,22 @@ import Jumbotron from './Jumbotron';
 import Container from './Container';
 
 class Home extends Component {
-    displayUsername() {
+   
+   displayUsername() {
 
-    }
+   }
 
 
-    render() {
-        return (
-            <div>
-                {this.displayUsername()}
-                <Navbar />
-                <Jumbotron />
-                <Container />
-            </div>
-        );
-    }
+   render() {
+      return (
+         <div>
+            {this.displayUsername()}
+            <Navbar />
+            <Jumbotron />
+            <Container />
+         </div>
+      );
+   }
 }
 
 export default Home;

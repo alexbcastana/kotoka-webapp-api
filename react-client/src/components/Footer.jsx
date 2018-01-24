@@ -1,14 +1,14 @@
 import React, { Component } from "react";
 
 export default class Footer extends Component {
-  render() {
-    return (
-        <div>
+   render() {
+      return (
+         <div>
             <hr />
             <footer>
-              <p>&copy; Kotoka 2017</p>
+               <p>&copy; Kotoka 2017</p>
             </footer>
-        </div>
-    );
-  }
+         </div>
+      );
+   }
 }
