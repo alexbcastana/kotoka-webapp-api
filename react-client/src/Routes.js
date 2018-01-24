@@ -1,8 +1,8 @@
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
 
-import Home from './containers/Home';
-import IdentifyBerry from './containers/IdentifyBerry';
+import Home from './components/Home';
+import IdentifyBerry from './components/IdentifyBerry';
 
 const Routes = (props) => (
     <Switch>
