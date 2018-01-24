@@ -41,7 +41,7 @@ class IdentifyBerry extends Component {
    renderImageIfExists(url) {
       const html = (
          <div>
-            <img src={url} />
+            <img src={url} alt='strawberry' />
             <div>
                <p>File Url: {url}</p>
                <button type="button" className="btn btn-success" onClick={() => { this.postBerry('ready to pick', { url }) }}>Ready to Pick!</button>
@@ -58,7 +58,7 @@ class IdentifyBerry extends Component {
             return html;
          }).catch((err) => {
             console.log('no image...', err.reponse);
-            if (err.response.status == 404) {
+            if (err.response.status === 404) {
                console.log('returning null');
                return null;
             }
