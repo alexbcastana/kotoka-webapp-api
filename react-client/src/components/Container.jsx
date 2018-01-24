@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
 import Footer from './Footer';
+import brainPower from '../images/brainPower.png';
+import strawberry from '../images/strawberry.png';
+import macDansgame from '../images/macDansgame.png';
 
 export default class Container extends Component {
    render() {
@@ -9,7 +12,7 @@ export default class Container extends Component {
                <div className="col s4">
                   <div className="card">
                      <div className="card-image">
-                        <img src="https://images.unsplash.com/photo-1494869042583-f6c911f04b4c?ixlib=rb-0.3.5&s=2b01cc95401a996955b11750c96c34ef&auto=format&fit=crop&w=1950&q=80" alt="human" />
+                        <img src={brainPower} alt="human" />
                         <a className="btn-floating halfway-fab waves-effect waves-light red"><i className="material-icons">info_outline</i></a>
                      </div>
                      <div className="card-content">
@@ -21,7 +24,7 @@ export default class Container extends Component {
                <div className="col s4">
                   <div className="card">
                      <div className="card-image">
-                        <img src="https://static.pexels.com/photos/298696/pexels-photo-298696.jpeg" alt="strawberry" />
+                        <img src={strawberry} alt="strawberry" />
                         <a className="btn-floating halfway-fab waves-effect waves-light red"><i className="material-icons">info_outline</i></a>
                      </div>
                      <div className="card-content">
@@ -33,7 +36,7 @@ export default class Container extends Component {
                <div className="col s4">
                   <div className="card">
                      <div className="card-image">
-                        <img src="https://static.pexels.com/photos/572056/pexels-photo-572056.jpeg" alt="tools" />
+                        <img src={macDansgame} alt="tools" />
                         <a className="btn-floating halfway-fab waves-effect waves-light red"><i className="material-icons">info_outline</i></a>
                      </div>
                      <div className="card-content">
