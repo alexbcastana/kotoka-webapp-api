@@ -85,3 +85,14 @@ resources:
           ReadCapacityUnits: 1
           WriteCapacityUnits: 1
         TableName: ${self:provider.environment.DYNAMODB_TABLE}
+ 
+    plantQueue:
+      Type: "AWS::SQS::Queue"
+      Properties:
+        QueueName: "kotokaplantqueue"
+ 
+    kotokaBucket:
+      Type: "AWS::S3::Bucket"
+      Properties:
+        BucketName: "kotokabucket"
+     
