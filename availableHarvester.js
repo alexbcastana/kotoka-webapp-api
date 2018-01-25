@@ -70,7 +70,7 @@ function handleSQSMessage(context, callback) {
 
 
 module.exports.receivePlantImage = function (event, context, callback) {
-   console.log("HERE");
+   handleSQSMessage(context, callback);
 }
 
 
