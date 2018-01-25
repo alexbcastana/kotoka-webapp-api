@@ -66,6 +66,24 @@ functions:
           path: berries/{id}
           method: delete
           cors: true
+  
+  receivePlantImage:
+    handler: availableHarvester.receivePlantImage
+    environment:
+      PLANT_QUEUE_URL: kotokaplantqueue
+      HARVESTER_LAMBDA_NAME: harvesterlambda
+    events:
+      - http:
+          path: available
+          method: get
+          cors: true 
+
+  harvesterlambda:
+    handler: availableHarvester.processPlantImage
+    environment:
+      PLANT_QUEUE_URL: kotokaplantqueue
+      PLANT_BUCKET: plantimagebucket
+      
 
 resources:
   Resources:
@@ -86,13 +104,12 @@ resources:
           WriteCapacityUnits: 1
         TableName: ${self:provider.environment.DYNAMODB_TABLE}
  
-    plantQueue:
+    kotokaplantqueue:
       Type: "AWS::SQS::Queue"
       Properties:
         QueueName: "kotokaplantqueue"
  
-    kotokaBucket:
+    plantimagebucket:
       Type: "AWS::S3::Bucket"
       Properties:
-        BucketName: "kotokabucket"
-     
+        BucketName: "plantimagebucket"
