@@ -79,7 +79,7 @@ function deleteMessage(receiptHandle, cb) {
 
   sqs.deleteMessage({
     ReceiptHandle: receiptHandle,
-    QueueUrl: PLANT_QUEUE_URL
+    QueueUrl: "https://sqs.us-east-1.amazonaws.com/730881713695/kotokaplantqueue"
   }, cb);
 }
 
@@ -89,8 +89,7 @@ function work(task, cb) {
    cb();
 }
 
-
-module.exports.harvesterlambda = function (event, context, callback) {
+module.exports.processPlantImage = function (event, context, callback) {
    work(event.Body, function(err) {
      if (err) {
         callback(err);
@@ -99,3 +98,4 @@ module.exports.harvesterlambda = function (event, context, callback) {
      }
    });
 };
+
