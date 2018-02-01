@@ -8,6 +8,7 @@
 */
 
 const AWS = require('aws-sdk');
+var async = require("async");
 
 var AWS_Region = process.env.AWS_REGION;
 
@@ -17,7 +18,7 @@ var s3 = new AWS.S3({region: AWS_Region});
 
 function receiveMessage(callback) {
   var params = {
-    Queue_Url: PLANT_QUEUE_URL,
+    QueueUrl: "https://sqs.us-east-1.amazonaws.com/730881713695/kotokaplantqueue",
     MaxNumberOfMessages: 1
   };
   sqs.receiveMessage(params, function(err, data) {
@@ -31,9 +32,9 @@ function receiveMessage(callback) {
 }
 
 function invokeHarvesterLambda(task, callback) {
-   var params {
-     FunctionName = HARVESTER_LAMBDA_NAME,
-     InvocationType = 'Event',
+   var params = {
+     FunctionName: "kotoka-webapp-api-dev-harvesterlambda",
+     InvocationType: 'Event',
      Payload: JSON.stringify(task)
    };
    lambda.invoke(params, function(err, data) {
@@ -50,7 +51,7 @@ function invokeHarvesterLambda(task, callback) {
 function handleSQSMessage(context, callback) {
   receiveMessage(function(err, message) {
     if (message && message.length > 0) {
-       var invocations[];
+       var invocations = [];
        invocations.push(function(callback) {
          invokeHarvesterLambda(message, callback);
        });
