@@ -26,7 +26,7 @@ function receiveMessage(callback) {
        console.error(err, err.stack);
        callback(err);
     } else {
-       callback(null, data.Messages[0]);
+       callback(null, data.Messages);
     }
   });
 }
@@ -75,27 +75,29 @@ module.exports.receivePlantImage = function (event, context, callback) {
 }
 
 
-function deleteMessage(receiptHandle, cb) {
-
+function deleteMessage(receiptHandle) {
   sqs.deleteMessage({
     ReceiptHandle: receiptHandle,
     QueueUrl: "https://sqs.us-east-1.amazonaws.com/730881713695/kotokaplantqueue"
-  }, cb);
+  }, function(err, data) {
+     if (err) console.log(err, err.stack);
+     else console.log(data);
+  });
 }
 
 
-function work(task, cb) {
-   console.log(task);
-   cb();
+function work(task, callback) {
+   var s3imagePath = JSON.parse(task).Records[0].s3.object.key;
+   console.log(s3imagePath);
+   callback();
 }
 
 module.exports.processPlantImage = function (event, context, callback) {
-   work(event.Body, function(err) {
+   work(event[0].Body, function(err) {
      if (err) {
         callback(err);
      } else {
-        deleteMessage(event.ReceiptHandler);
+        deleteMessage(event[0].ReceiptHandle);
      }
    });
 };
-
