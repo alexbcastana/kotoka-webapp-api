@@ -26,7 +26,7 @@ function receiveMessage(callback) {
        console.error(err, err.stack);
        callback(err);
     } else {
-       callback(null, data.Messages);
+       callback(null, data.Messages[0]);
     }
   });
 }
@@ -94,7 +94,7 @@ module.exports.processPlantImage = function (event, context, callback) {
      if (err) {
         callback(err);
      } else {
-        deleteMessage(event.ReceiptHandle, callback);
+        deleteMessage(event.ReceiptHandler);
      }
    });
 };
