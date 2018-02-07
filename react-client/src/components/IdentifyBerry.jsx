@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Axios from 'axios';
+import '../styles/identifyBerry.css'
 
 class IdentifyBerry extends Component {
    constructor(props) {
@@ -41,7 +42,7 @@ class IdentifyBerry extends Component {
    renderImageIfExists(url) {
       const html = (
          <div>
-            <img src={url} alt='strawberry' />
+            <img src={url} className='img' alt='strawberry' />
             <div>
                <p>File Url: {url}</p>
                <button type="button" className="btn btn-success" onClick={() => { this.postBerry('ready to pick', { url }) }}>Ready to Pick!</button>
