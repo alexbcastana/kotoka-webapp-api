@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Axios from 'axios';
 import '../styles/identifyBerry.css'
+import Navbar from './Navbar'
 
 class IdentifyBerry extends Component {
    constructor(props) {
@@ -140,6 +141,7 @@ class IdentifyBerry extends Component {
       // );
       return (
          <div>
+            <Navbar />
             {this.renderImageIfExists(img_1)}
             {this.renderImageIfExists(img_2)}
             {this.renderImageIfExists(img_3)}
