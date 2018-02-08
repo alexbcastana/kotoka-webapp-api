@@ -13,7 +13,7 @@ export default class Navbar extends Component {
       return (
          <nav>
             <div className="nav-wrapper">
-               <a className="brand-logo center" href="../index.html">Kotoka</a>
+               <a className="brand-logo center" href="/">Kotoka</a>
                <ul id="nav-mobile" className="left hide-on-med-and-down">
                   <li><a href={identifyBerry}>Berries</a></li>
                </ul>
