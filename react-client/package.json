@@ -3,18 +3,27 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "amazon-cognito-identity-js": "^1.31.0",
+    "aws-sdk": "^2.190.0",
     "axios": "^0.17.1",
+    "crypto-js": "^3.1.9-1",
     "react": "^16.1.1",
-    "react-bootstrap": "^0.31.5",
     "react-dom": "^16.1.1",
+    "react-loading": "^1.0.3",
     "react-redux": "^5.0.6",
     "react-router-dom": "^4.2.2",
+    "react-saga": "^0.2.6",
     "react-scripts": "0.9.5",
-    "redux": "^3.7.2"
+    "redux": "^3.7.2",
+    "redux-act": "^1.7.0",
+    "redux-logger": "^3.0.6",
+    "redux-saga": "^0.16.0"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "prop-types": "^15.6.0"
+  },
   "scripts": {
-    "start": "PORT=3001 HTTPS=true react-scripts start",
+    "start": "PORT=3000 react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
