@@ -188,9 +188,14 @@ export default class Signup extends Component {
    }
 
    render() {
+      const width = {
+         width: "500px",
+         display: "inline-block"
+      }
+
       return (
-         <div className="container">
-            <div className="card">
+         <div className="container center">
+            <div className="card" style={width}>
                <div className="card-content">
                   <div className="Signup">
                      {this.state.newUser === null
