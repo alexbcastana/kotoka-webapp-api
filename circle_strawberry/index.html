@@ -1,29 +1,49 @@
+<meta charset="utf-8"/>
 <!doctype html>
 <html>
 	<head>
-		<title>TestPage</title>
-		<h2>Test Page</h2>
+	<style>
+	img.hidden{
+		display: none;
+	}
+	</style>
+		<title>StrawberryFinder</title>
+		<h2>Strawberry Finder</h2>
 		<script src="/home/ardamax/temp/node_modules/fabric/dist/fabric.js" type="text/javascript"></script>
 		<script src="/home/ardamax/temp/node_modules/fabric/dist/fabric.require.js" type="text/javascript"></script>
-
+		<img src="https://s3.amazonaws.com/kotoka-berry-images/4.jpg" id="plant_4" class="hidden">
 	</head>
 
 	<body>
-		<!-- <img src="https://s3.amazonaws.com/kotoka-berry-images/PerfectStrawberry.jpg"> -->
+                <canvas id="c" width="1260" height="720"></canvas>
+		<input id="mkcir" type="button" value="Make Circle" />
+                <input id="subimg" type="button" value="Submit Image" />
 		<script type="text/javascript">
-			// create a wrapper around native canvas element (with id="c")
-			var canvas = new fabric.Canvas('c');
-
-			// create a rectangle object
-			var rect = new fabric.Rect({
-			  left: 100,
-			  top: 100,
-			  fill: 'green',
-			  width: 20,
-			  height: 20
+                        // create a wrapper around native canvas element (with id="c")
+                        var canvas = new fabric.Canvas('c');
+			var imgElement = document.getElementById('plant_4');
+			var imgInstance = new fabric.Image(imgElement, {
+				left: 100,
+				top: 100,
+				selectable: false
 			});
-
-			// "add" rectangle onto canvas
-			canvas.add(rect);
+			canvas.add(imgInstance);
+			var circle = new fabric.Circle({
+				radius: 100, fill: 'black', left: 100, top: 100, opacity: 30
+				, borderColor: 'orange', borderOpacityWhenMoving: 0.7, opacity: 0.4
+			});
+			document.getElementById("mkcir").onclick = function () {
+				circle.clone(function(cclone){
+					canvas.add(cclone);
+					cclone.bringToFront();
+				})
+			};
+                        document.getElementById("subimg").onclick = function () {
+				var objects = canvas.getObjects();
+				objects.forEach(function(item){
+					console.log(item);
+				});
+                        };
 		</script>
+	</body>
 </html>
