@@ -6,7 +6,7 @@ export default class Navbar extends Component {
    }
 
    render() {
-      const signup = 'https://kotoka.auth.us-east-1.amazoncognito.com/signup?response_type=code&client_id=2u922ia7hq2q1k3mrjptbbo4bs&redirect_uri=https://localhost:3001';
+      const signup = '/register';
       const login = 'https://kotoka.auth.us-east-1.amazoncognito.com/login?response_type=code&client_id=2u922ia7hq2q1k3mrjptbbo4bs&redirect_uri=https://localhost:3001';
       const identifyBerry = '/identifyBerry';
 
