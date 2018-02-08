@@ -51,23 +51,16 @@ function invokeHarvesterLambda(task, callback) {
 function handleSQSMessage(context, callback) {
   receiveMessage(function(err, message) {
     if (message && message.length > 0) {
-       var invocations = [];
-       invocations.push(function(callback) {
-         invokeHarvesterLambda(message, callback);
-       });
-      async.parallel(invocations, function(err) {
-        if (err) {
-          console.error(err, err.stack);
-          callback(err);
-        } else {
-          callback(null, 'PAUSE');
-        }
-      });
-    } else {
-      callback(null, 'DONE');
+       console.log(message[0].Body);
+       callback(null, JSON.parse(message[0].Body));
+    }
+    else
+    {
+       callback(null, "DONE");
     }
   });
 }
+    
 
 
 module.exports.receivePlantImage = function (event, context, callback) {
@@ -89,15 +82,16 @@ function deleteMessage(receiptHandle) {
 function work(task, callback) {
    var s3imagePath = JSON.parse(task).Records[0].s3.object.key;
    console.log(s3imagePath);
-   callback();
+   callback(null, s3imagePath);
 }
 
 module.exports.processPlantImage = function (event, context, callback) {
-   work(event[0].Body, function(err) {
+   work(event[0].Body, function(err, image) {
      if (err) {
         callback(err);
      } else {
-        deleteMessage(event[0].ReceiptHandle);
+        console.log(image);
+        callback(null, image);
      }
    });
 };
