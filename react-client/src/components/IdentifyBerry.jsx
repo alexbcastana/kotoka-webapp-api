@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import Axios from 'axios';
+import '../styles/identifyBerry.css'
+import Navbar from './Navbar'
 
 class IdentifyBerry extends Component {
    constructor(props) {
@@ -44,8 +46,14 @@ class IdentifyBerry extends Component {
             <img src={url} alt='strawberry' />
             <div>
                <p>File Url: {url}</p>
-               <button type="button" className="btn btn-success" onClick={() => { this.postBerry('ready to pick', { url }) }}>Ready to Pick!</button>
-               <button type="button" className="btn btn-danger" onClick={() => { this.postBerry('this berry is not ripe', { url }) }}>Unripe</button>
+               <button type="button" className="btn btn-success"
+                  onClick={() =>
+                        { this.postBerry('ready to pick', { url }) }
+                  }>Ready to Pick!</button>
+               <button type="button" className="btn btn-danger"
+                  onClick={() =>
+                        { this.postBerry('this berry is not ripe', { url }) }
+                  }>Unripe</button>
             </div>
             <br />
             <br />
@@ -69,27 +77,6 @@ class IdentifyBerry extends Component {
       return html;
    }
 
-   // render() {
-   //     const renderBerries = this.state.berries.map(function(berry, i) {
-   //         if (berry.id === 'b5948160-d420-11e7-86db-c74281cc3118') {
-   //             return(
-   //                 <div key={i}>
-   //                     <p>FileName: {berry.notes.filename}</p>
-   //                     <p>pickStatus: {berry.notes.pickStatus}</p>
-   //                 </div>
-   //             );
-   //         }
-   //     });
-   //     return (
-   //         <div className="container">
-   //             <img src="https://s3.amazonaws.com/kotoka-berry-images/PerfectStrawberry.jpg" />
-   //             { renderBerries }
-   //             <button type="button" className="btn btn-success" onClick={() => {this.postBerry()}}>Ready to Pick!</button>
-   //             <button type="button" className="btn btn-danger">Unripe</button>
-   //         </div>
-   //     )
-   // }
-
    render() {
       const imgUrl = 'https://s3.amazonaws.com/kotoka-berry-images/';
       const img_1 = imgUrl + '1.jpg';
@@ -98,47 +85,9 @@ class IdentifyBerry extends Component {
       const img_4 = imgUrl + '4.jpg';
       const img_5 = imgUrl + '5.jpg';
 
-      // return (
-      //     <div>
-      //         if (checkIfImageExists(img_1)) {
-      //             <img src={img_1} />
-      //             <div>
-      //                 <p>File Url: {img_1}</p>
-      //                 <button type="button" className="btn btn-success" onClick={() => {this.postBerry('ready to pick', {img_1})}}>Ready to Pick!</button>
-      //                 <button type="button" className="btn btn-danger" onClick={() => {this.postBerry('this berry is not ripe', {img_1})}}>Unripe</button>
-      //             </div>
-      //             <br />
-      //             <br />
-      //         }
-      //
-      //         <img src={img_2} />
-      //         <div>
-      //             <p>File Url: {img_2}</p>
-      //             <button type="button" className="btn btn-success" onClick={() => {this.postBerry('ready to pick', {img_2})}}>Ready to Pick!</button>
-      //             <button type="button" className="btn btn-danger" onClick={() => {this.postBerry('this berry is not ripe', {img_2})}}>Unripe</button>
-      //         </div>
-      //         <br />
-      //         <br />
-      //
-      //         <img src={img_3} />
-      //         <div>
-      //             <p>File Url: {img_3}</p>
-      //             <button type="button" className="btn btn-success" onClick={() => {this.postBerry('ready to pick', {img_3})}}>Ready to Pick!</button>
-      //             <button type="button" className="btn btn-danger" onClick={() => {this.postBerry('this berry is not ripe', {img_3})}}>Unripe</button>
-      //         </div>
-      //         <br />
-      //         <br />
-      //
-      //         <img src={img_4} />
-      //         <div>
-      //             <p>File Url: {img_4}</p>
-      //             <button type="button" className="btn btn-success" onClick={() => {this.postBerry('ready to pick', {img_4})}}>Ready to Pick!</button>
-      //             <button type="button" className="btn btn-danger" onClick={() => {this.postBerry('this berry is not ripe', {img_4})}}>Unripe</button>
-      //         </div>
-      //     </div>
-      // );
       return (
          <div>
+            <Navbar />
             {this.renderImageIfExists(img_1)}
             {this.renderImageIfExists(img_2)}
             {this.renderImageIfExists(img_3)}
