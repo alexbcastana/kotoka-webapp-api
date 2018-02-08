@@ -3,7 +3,8 @@ import { CognitoUserPool, CognitoUserAttribute, CognitoUser } from '../../public
 import { AWSCognito } from 'aws-sdk'
 
 export default class RegisterForm extends Component {
-   signup() {
+
+   register() {
 		var poolData = {
 			UserPoolId : 'us-east-1_bpAnoXGkR',
 			ClientId : '4mu6gaakir506i83a6e4hrqi3l'
@@ -29,7 +30,7 @@ export default class RegisterForm extends Component {
    }
 
    componentDidMount() {
-      this.signup()
+      
    }
    
    render() {
